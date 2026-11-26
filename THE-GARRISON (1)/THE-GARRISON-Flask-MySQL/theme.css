@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --bg-pub-dark: #0f0a07;
+  --wood-dark: #1d130d;
+  --wood-medium: #2b1c14;
+  --wood-light: #3a261b;
+  --brass-gold: #c99e48;
+  --brass-light: #e6c278;
+  --brass-dark: #8a6623;
+  --amber-glow: rgba(217, 130, 43, 0.35);
+  --text-cream: #f4ebd9;
+  --text-muted: #a69580;
+  --status-free: #2e7d32;
+  --status-busy: #b71c1c;
+  --status-reserved: #b26a00;
+
+  --font-title: 'Cinzel Decorative', serif;
+  --font-subtitle: 'Playfair Display', serif;
+  --font-ui: 'Inter', sans-serif;
+}

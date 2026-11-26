@@ -1,0 +1,623 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-pub-dark);
+  color: var(--text-cream);
+  font-family: var(--font-ui);
+  min-height: 100vh;
+}
+
+/* ================= LOGIN INDEPENDIENTE ================= */
+.login-backdrop {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(15, 10, 7, 0.4) 0%, rgba(15, 10, 7, 0.9) 85%),
+    url('imagenes/garrison_bg.jpg') no-repeat center center / cover;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 2.5rem 2rem 2.2rem;
+  border-radius: 18px;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 2px, transparent 2px, transparent 6px),
+    linear-gradient(160deg, var(--wood-medium) 0%, var(--wood-dark) 100%);
+  border: 2px solid var(--brass-gold);
+  box-shadow: 0 0 45px var(--amber-glow), inset 0 0 25px rgba(0,0,0,0.9), 0 20px 40px rgba(0,0,0,0.95);
+  text-align: center;
+}
+
+.garrison-plaque {
+  background: linear-gradient(180deg, #1a110b 0%, #110b07 100%);
+  border: 2px solid var(--brass-gold);
+  outline: 4px solid var(--wood-dark);
+  border-radius: 12px;
+  padding: 1.1rem 1rem;
+  margin-top: -4.2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.75);
+}
+
+.plaque-sub {
+  display: block;
+  font-family: var(--font-subtitle);
+  font-size: 0.75rem;
+  letter-spacing: 0.35em;
+  color: var(--brass-light);
+}
+
+.plaque-title {
+  font-family: var(--font-title);
+  font-size: 1.25rem;
+  line-height: 1.05;
+  color: var(--brass-light);
+}
+
+.plaque-title span {
+  display: block;
+  font-size: 2.15rem;
+  background: linear-gradient(180deg, #f5dca0 0%, var(--brass-gold) 55%, var(--brass-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.ornament-divider {
+  color: var(--brass-gold);
+  font-size: 0.8rem;
+  letter-spacing: 0.4em;
+  margin-top: 0.4rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  background: rgba(12, 8, 5, 0.85);
+  border: 1.5px solid var(--brass-gold);
+  border-radius: 999px;
+  padding: 0.2rem 1rem;
+}
+
+.input-icon {
+  color: var(--brass-gold);
+  padding-right: 0.75rem;
+  margin-right: 0.75rem;
+  border-right: 1px solid rgba(201,158,72,0.35);
+}
+
+.input-group input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-cream);
+  font-family: var(--font-subtitle);
+  font-size: 0.95rem;
+  padding: 0.75rem 0;
+}
+
+.login-error {
+  min-height: 1.2rem;
+  font-size: 0.85rem;
+  color: #ff7b7b;
+}
+
+.login-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.btn-brass-seal {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  cursor: pointer;
+  background: radial-gradient(circle at 30% 30%, #3a2718 0%, #170e09 85%);
+  border: 3px solid var(--brass-gold);
+  box-shadow: 0 0 0 4px #170e09, 0 0 0 5px var(--brass-dark), 0 8px 20px rgba(0,0,0,0.85);
+  color: var(--brass-light);
+  font-family: var(--font-title);
+  font-weight: 700;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+}
+
+/* ================= FONDOS INTERNOS ================= */
+.app-shell {
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.bg-salon {
+  background-image:
+    linear-gradient(rgba(15, 10, 7, 0.78), rgba(15, 10, 7, 0.88)),
+    url('imagenes/salon_bg.jpg'),
+    url('imagenes/garrison_bg.jpg');
+}
+
+.bg-barra {
+  background-image:
+    linear-gradient(rgba(15, 10, 7, 0.78), rgba(15, 10, 7, 0.88)),
+    url('imagenes/barra_bg.jpg'),
+    url('imagenes/garrison_bg.jpg');
+}
+
+/* ================= BARRA DE NAVEGACIÓN SUPERIOR ================= */
+.topbar-garrison {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 2rem;
+  background: linear-gradient(180deg, #241710 0%, #140c08 100%);
+  border-bottom: 2px solid var(--brass-gold);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.75);
+}
+
+.brand-logo {
+  font-family: var(--font-title);
+  color: var(--brass-light);
+  font-size: 1.25rem;
+}
+
+.empleado-tag {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.topbar-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.nav-pill {
+  background: rgba(18, 12, 8, 0.9);
+  border: 1.5px solid var(--brass-dark);
+  color: var(--text-cream);
+  font-family: var(--font-subtitle);
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  padding: 0.5rem 1.25rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.nav-pill:hover, .nav-pill.active {
+  border-color: var(--brass-light);
+  background: linear-gradient(180deg, #3c281a, #1f140d);
+  color: var(--brass-light);
+  box-shadow: 0 0 12px var(--amber-glow);
+}
+
+.btn-seal-mini {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #3a2718, #170e09);
+  border: 2px solid var(--brass-gold);
+  color: var(--brass-light);
+  font-family: var(--font-title);
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+
+/* ================= CONTENEDORES DE APARTADOS ================= */
+.vista-seccion {
+  padding: 1.8rem 2rem;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.panel-container {
+  background: rgba(29, 19, 13, 0.92);
+  border: 1.5px solid var(--brass-gold);
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.75);
+}
+
+.panel-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(201,158,72,0.3);
+  padding-bottom: 0.85rem;
+  margin-bottom: 1.25rem;
+}
+
+.panel-header h2, .ticket-sidebar h2 {
+  font-family: var(--font-subtitle);
+  color: var(--brass-light);
+}
+
+/* ================= APARTADO MESAS ================= */
+.leyenda-estados {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-size: 0.85rem;
+}
+
+.dot {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+.dot.free { background: var(--status-free); }
+.dot.busy { background: var(--status-busy); }
+.dot.reserved { background: var(--status-reserved); }
+
+.floor-plan-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1.4rem;
+  padding: 1rem 0;
+}
+
+.mesa-node {
+  background: var(--wood-medium);
+  border: 2.5px solid var(--brass-gold);
+  border-radius: 16px;
+  padding: 1.6rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.mesa-node.round {
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 190px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.mesa-node.Disponible { border-color: #4caf50; }
+.mesa-node.Ocupada { border-color: #e53935; }
+.mesa-node.Reservada { border-color: #ffb300; }
+.mesa-node.selected { box-shadow: 0 0 22px var(--amber-glow); transform: scale(1.03); }
+
+.mesa-num {
+  font-family: var(--font-title);
+  font-size: 1.8rem;
+  color: var(--brass-light);
+}
+
+/* ================= APARTADO COMANDA ================= */
+.comanda-layout {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .comanda-layout { grid-template-columns: 1fr; }
+}
+
+.categorias-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.cat-btn {
+  background: var(--wood-medium);
+  border: 1px solid var(--brass-dark);
+  color: var(--text-cream);
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.82rem;
+}
+
+.cat-btn.active {
+  background: var(--brass-gold);
+  color: var(--bg-pub-dark);
+  font-weight: 600;
+}
+
+.bebidas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 1rem;
+}
+
+.bebida-item-card {
+  background: var(--wood-medium);
+  border: 1px solid rgba(201,158,72,0.35);
+  border-radius: 10px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.7rem;
+}
+
+.ticket-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+  color: var(--brass-gold);
+  margin: 0.75rem 0;
+}
+
+.ticket-lista {
+  list-style: none;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.ticket-row {
+  display: flex;
+  justify-content: space-between;
+  background: rgba(0,0,0,0.35);
+  padding: 0.55rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.88rem;
+}
+
+.ticket-total-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  color: var(--brass-light);
+  border-top: 1px solid rgba(201,158,72,0.3);
+  padding-top: 0.85rem;
+  margin-bottom: 0.85rem;
+}
+
+/* ================= APARTADO CLIENTES ================= */
+.cliente-form-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.cliente-form-inline input {
+  flex: 1;
+  min-width: 180px;
+  background: rgba(12,8,5,0.85);
+  border: 1px solid var(--brass-gold);
+  color: var(--text-cream);
+  padding: 0.6rem 0.9rem;
+  border-radius: 8px;
+}
+
+.clientes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.cliente-card {
+  background: var(--wood-medium);
+  border: 1px solid rgba(201,158,72,0.35);
+  border-radius: 10px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* ================= APARTADO BARRA ================= */
+.barra-columnas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+@media (max-width: 850px) {
+  .barra-columnas { grid-template-columns: 1fr; }
+}
+
+.barra-col {
+  background: rgba(15, 10, 7, 0.65);
+  border: 1px solid rgba(201,158,72,0.25);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.col-title {
+  text-align: center;
+  padding: 0.45rem;
+  border-radius: 6px;
+  margin-bottom: 0.9rem;
+  font-family: var(--font-subtitle);
+}
+.col-title.pendiente { background: rgba(183, 28, 28, 0.35); border: 1px solid #e53935; }
+.col-title.preparando { background: rgba(178, 106, 0, 0.35); border: 1px solid #ffb300; }
+.col-title.entregado { background: rgba(46, 125, 50, 0.35); border: 1px solid #4caf50; }
+
+.pedidos-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.order-ticket-card {
+  background: #f4ebd9;
+  color: #1d130d;
+  border-radius: 8px;
+  padding: 0.85rem;
+  border-left: 5px solid var(--brass-dark);
+}
+
+/* ================= APARTADO RECETAS ================= */
+.recetas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 1.25rem;
+}
+
+.receta-card {
+  background: var(--wood-medium);
+  border: 1px solid var(--brass-gold);
+  border-radius: 12px;
+  padding: 1.2rem;
+}
+
+.receta-card h3 {
+  font-family: var(--font-subtitle);
+  color: var(--brass-light);
+  margin-bottom: 0.4rem;
+}
+
+/* ================= BOTONES Y MODAL ================= */
+.btn-brass, .btn-brass-full {
+  background: linear-gradient(180deg, var(--brass-light), var(--brass-gold));
+  color: var(--bg-pub-dark);
+  border: none;
+  font-weight: 700;
+  padding: 0.65rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-brass-full { width: 100%; }
+.btn-brass-full:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal-card {
+  background: var(--wood-dark);
+  border: 2px solid var(--brass-gold);
+  border-radius: 14px;
+  padding: 1.5rem;
+  width: 90%;
+  max-width: 400px;
+}
+
+.modal-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.btn-close {
+  background: none;
+  border: none;
+  color: var(--text-cream);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.extras-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1.2rem;
+}
+
+.extra-row {
+  display: flex;
+  justify-content: space-between;
+  background: var(--wood-medium);
+  padding: 0.6rem 0.8rem;
+  border-radius: 6px;
+}
+
+/* ================= CAJA, INVENTARIO Y REPORTES ================= */
+.operacion-mensaje {
+  min-height: 1.3rem;
+  margin: 0.5rem 0 0.8rem;
+  color: var(--brass-light);
+}
+.operacion-mensaje.error { color: #ff8c82; }
+.operacion-ayuda { color: var(--text-muted); margin: 0.2rem 0 1rem; line-height: 1.5; }
+.operacion-subtitulo { color: var(--brass-light); font-family: var(--font-subtitle); margin: 1.5rem 0 0.8rem; }
+.operacion-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+  gap: 0.85rem;
+  align-items: end;
+  background: rgba(12,8,5,0.45);
+  border: 1px solid rgba(201,158,72,0.3);
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 0.9rem 0 1.25rem;
+}
+.operacion-form label { display: flex; flex-direction: column; gap: 0.35rem; color: var(--text-muted); font-size: 0.82rem; }
+.operacion-form input, .operacion-form select, .caja-pedido select {
+  width: 100%;
+  min-height: 40px;
+  background: #120c08;
+  border: 1px solid var(--brass-dark);
+  border-radius: 7px;
+  color: var(--text-cream);
+  padding: 0.55rem 0.65rem;
+  font: inherit;
+}
+.operacion-form input:focus, .operacion-form select:focus, .caja-pedido select:focus { outline: 2px solid var(--brass-gold); outline-offset: 1px; }
+.operacion-form .btn-brass-full { min-height: 40px; }
+.operacion-notas { grid-column: span 2; }
+.operacion-tabla-wrap { width: 100%; overflow-x: auto; margin: 0.7rem 0 1rem; }
+.operacion-tabla { width: 100%; border-collapse: collapse; min-width: 640px; }
+.operacion-tabla th, .operacion-tabla td { padding: 0.7rem 0.8rem; border-bottom: 1px solid rgba(201,158,72,0.22); text-align: left; }
+.operacion-tabla th { color: var(--brass-light); font-family: var(--font-subtitle); background: rgba(12,8,5,0.65); }
+.operacion-tabla td { color: var(--text-cream); font-size: 0.9rem; }
+.operacion-lista { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0.85rem; }
+.caja-panel, .caja-pedido { background: rgba(12,8,5,0.55); border: 1px solid rgba(201,158,72,0.35); border-radius: 10px; padding: 1rem; }
+.caja-panel h3, .caja-pedido h3 { color: var(--brass-light); font-family: var(--font-subtitle); margin-bottom: 0.55rem; }
+.caja-panel p, .caja-pedido p { color: var(--text-muted); margin: 0.35rem 0; }
+.caja-pedido { display: flex; flex-direction: column; gap: 0.55rem; }
+.caja-pedido strong { color: var(--brass-light); }
+.caja-cifras { display: grid; grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); gap: 0.65rem; margin: 0.9rem 0; }
+.caja-cifra { background: rgba(201,158,72,0.08); border: 1px solid rgba(201,158,72,0.2); border-radius: 8px; padding: 0.75rem; }
+.caja-cifra span { display: block; color: var(--text-muted); font-size: 0.78rem; }
+.caja-cifra strong { display: block; color: var(--brass-light); margin-top: 0.25rem; }
+.caja-pedido .btn-brass { margin-top: 0.2rem; }
+.resumen-reporte { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.7rem; }
+.resumen-reporte:empty { display: none; }
+.resumen-reporte .caja-cifra { min-height: 70px; }
+@media (max-width: 600px) {
+  .operacion-notas { grid-column: auto; }
+  .vista-seccion { padding: 1rem; }
+  .operacion-form { grid-template-columns: 1fr; }
+}

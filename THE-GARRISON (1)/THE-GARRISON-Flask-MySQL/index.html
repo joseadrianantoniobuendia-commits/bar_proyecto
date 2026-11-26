@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Garrison - Sistema POS</title>
+  <link rel="stylesheet" href="theme.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ================= 1. LOGIN INDEPENDIENTE ================= -->
+  <section id="login-screen" class="login-backdrop">
+    <div class="login-card">
+      <div class="garrison-plaque">
+        <span class="plaque-sub">EST. 1919</span>
+        <h1 class="plaque-title">THE<br><span>GARRISON</span></h1>
+        <div class="ornament-divider">✦ ❖ ✦</div>
+      </div>
+
+      <form id="login-form" class="login-form" autocomplete="off">
+        <div class="input-group">
+          <label for="username" class="sr-only">Usuario</label>
+          <span class="input-icon">👤</span>
+          <input type="text" id="username" placeholder="USUARIO (ej. roberto)" required />
+        </div>
+
+        <div class="input-group">
+          <label for="password" class="sr-only">Contraseña</label>
+          <span class="input-icon">🔑</span>
+          <input type="password" id="password" placeholder="PIN (ej. 1234)" required />
+        </div>
+
+        <p id="login-error" class="login-error" aria-live="polite"></p>
+
+        <div class="login-action">
+          <span class="barrel-icon">🛢️</span>
+          <button type="submit" class="btn-brass-seal">
+            <span>LOGIN</span>
+          </button>
+          <span class="barrel-icon">🛢️</span>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================= 2. SISTEMA INTERNO (APARTADOS SEPARADOS) ================= -->
+  <div id="pos-app" class="app-shell bg-salon" style="display: none;">
+    
+    <!-- Barra de navegación compartida entre todos los apartados -->
+    <header class="topbar-garrison">
+      <div class="topbar-brand">
+        <span class="brand-logo">THE GARRISON</span>
+        <span id="empleado-activo" class="empleado-tag"></span>
+      </div>
+
+      <nav class="topbar-nav">
+        <button class="nav-pill active" data-vista="mesas">Mesas</button>
+        <button class="nav-pill" data-vista="comanda">Comanda</button>
+        <button class="nav-pill" data-vista="clientes">Clientes</button>
+        <button class="nav-pill" data-vista="barra">Barra</button>
+        <button class="nav-pill" data-vista="caja">Caja</button>
+        <button class="nav-pill" data-vista="inventario">Inventario</button>
+        <button class="nav-pill" data-vista="reportes">Reportes</button>
+        <button class="nav-pill" data-vista="recetas">Recetas</button>
+      </nav>
+
+      <button id="btn-logout" class="btn-seal-mini" title="Volver al Login">Login</button>
+    </header>
+
+    <!-- APARTADO A: MESAS -->
+    <main id="vista-mesas" class="vista-seccion">
+      <div class="panel-container">
+        <div class="panel-header">
+          <h2>Plano de Mesas • The Garrison</h2>
+          <div class="leyenda-estados">
+            <span class="dot free"></span> Disponible
+            <span class="dot busy"></span> Ocupada
+            <span class="dot reserved"></span> Reservada
+          </div>
+        </div>
+        <div id="mesas-floor-plan" class="floor-plan-grid"></div>
+      </div>
+    </main>
+
+    <!-- APARTADO B: COMANDA Y EXTRAS -->
+    <main id="vista-comanda" class="vista-seccion" style="display: none;">
+      <div class="comanda-layout">
+        <div class="panel-container">
+          <div class="panel-header">
+            <h2>Carta de Bebidas</h2>
+            <div id="categorias-filter" class="categorias-bar"></div>
+          </div>
+          <div id="bebidas-catalogo" class="bebidas-grid"></div>
+        </div>
+
+        <aside class="panel-container ticket-sidebar">
+          <h2>Ticket Comanda</h2>
+          <div class="ticket-meta">
+            <span id="ticket-mesa-info">Mesa: Sin seleccionar</span>
+            <span id="ticket-cliente-info">Cliente: Público general</span>
+          </div>
+          <ul id="ticket-lista" class="ticket-lista"></ul>
+          <div class="ticket-bottom">
+            <div class="ticket-total-row">
+              <span>TOTAL</span>
+              <strong id="ticket-total">$0.00</strong>
+            </div>
+            <button id="btn-enviar-barra" class="btn-brass-full" disabled>Enviar a Barra</button>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <!-- APARTADO C: CLIENTES -->
+    <main id="vista-clientes" class="vista-seccion" style="display: none;">
+      <div class="panel-container">
+        <div class="panel-header">
+          <h2>Directorio de Clientes Frecuentes</h2>
+        </div>
+        <form id="form-nuevo-cliente" class="cliente-form-inline">
+          <input type="text" id="cli-nombre" placeholder="Nombre completo" required />
+          <input type="tel" id="cli-telefono" placeholder="Teléfono (10 dígitos)" required />
+          <input type="email" id="cli-correo" placeholder="Correo electrónico" />
+          <button type="submit" class="btn-brass">Registrar y Asignar</button>
+        </form>
+        <div id="clientes-lista" class="clientes-grid"></div>
+      </div>
+    </main>
+
+    <!-- APARTADO D: BARRA (COLA DE PEDIDOS) -->
+    <main id="vista-barra" class="vista-seccion" style="display: none;">
+      <div class="panel-container">
+        <div class="panel-header">
+          <h2>Monitor de Barra • Estado de Pedidos</h2>
+        </div>
+        <div class="barra-columnas">
+          <div class="barra-col">
+            <h3 class="col-title pendiente">Pendiente</h3>
+            <div id="col-pendiente" class="pedidos-stack"></div>
+          </div>
+          <div class="barra-col">
+            <h3 class="col-title preparando">Preparando</h3>
+            <div id="col-preparando" class="pedidos-stack"></div>
+          </div>
+          <div class="barra-col">
+            <h3 class="col-title entregado">Entregado</h3>
+            <div id="col-entregado" class="pedidos-stack"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- APARTADO E: CAJA Y COBROS -->
+    <main id="vista-caja" class="vista-seccion" style="display: none;">
+      <div class="panel-container">
+        <div class="panel-header">
+          <h2>Caja • Apertura, cobros y cierre</h2>
+          <button id="btn-actualizar-caja" class="btn-brass">Actualizar</button>
+        </div>
+        <p id="caja-mensaje" class="operacion-mensaje" aria-live="polite"></p>
+        <div id="caja-panel"></div>
+        <h3 class="operacion-subtitulo">Pedidos entregados por cobrar</h3>
+        <div id="caja-pendientes" class="operacion-lista"></div>
+      </div>
+    </main>
+
+    <!-- APARTADO F: INVENTARIO DE INGREDIENTES -->
+    <main id="vista-inventario" class="vista-seccion" style="display: none;">
+      <div class="panel-container">
+        <div class="panel-header">
+          <h2>Inventario de Ingredientes</h2>
+          <button id="btn-actualizar-inventario" class="btn-brass">Actualizar</button>
+        </div>
+        <p class="operacion-ayuda">Las recetas descuentan existencias cuando un pedido pasa a Entregado. Registra aquí las existencias iniciales y las entradas.</p>
+        <p id="inventario-mensaje" class="operacion-mensaje" aria-live="polite"></p>
+        <form id="form-movimiento-inventario" class="operacion-form">
+          <label>Ingrediente<select id="inventario-ingrediente" required></select></label>
+          <label>Movimiento<select id="inventario-tipo" required>
+            <option value="Entrada">Entrada</option>
+            <option value="AjustePositivo">Ajuste positivo</option>
+            <option value="AjusteNegativo">Ajuste negativo</option>
+            <option value="Merma">Merma</option>
+          </select></label>
+          <label>Cantidad<input id="inventario-cantidad" type="number" min="0.01" step="0.01" required></label>
+          <label>Costo unitario (opcional)<input id="inventario-costo" type="number" min="0" step="0.01"></label>
+          <label class="operacion-notas">Notas<input id="inventario-notas" type="text" maxlength="255" placeholder="Ej. Existencia inicial"></label>
+          <button type="submit" class="btn-brass-full">Guardar movimiento</button>
+        </form>
+        <h3 class="operacion-subtitulo">Existencias actuales</h3>
+        <div class="operacion-tabla-wrap"><table class="operacion-tabla">
+          <thead><tr><th>Ingrediente</th><th>Existencia</th><th>Unidad</th></tr></thead>
+          <tbody id="inventario-existencias"><tr><td colspan="3">Cargando inventario…</td></tr></tbody>
+        </table></div>
+        <h3 class="operacion-subtitulo">Movimientos recientes</h3>
+        <div class="operacion-tabla-wrap"><table class="operacion-tabla">
+          <thead><tr><th>Fecha</th><th>Ingrediente</th><th>Tipo</th><th>Cantidad</th><th>Empleado</th><th>Notas</th></tr></thead>
+          <tbody id="inventario-movimientos"><tr><td colspan="6">Aún no hay movimientos.</td></tr></tbody>
+        </table></div>
+      </div>
+    </main>
+
+    <!-- APARTADO G: REPORTES DE VENTAS -->
+    <main id="vista-reportes" class="vista-seccion" style="display: none;">
+      <div class="panel-container">
+        <div class="panel-header"><h2>Reportes de Ventas</h2></div>
+        <p class="operacion-mensaje" id="reportes-mensaje" aria-live="polite"></p>
+        <form id="form-reporte-ventas" class="operacion-form reporte-form">
+          <label>Desde<input id="reporte-desde" type="date" required></label>
+          <label>Hasta<input id="reporte-hasta" type="date" required></label>
+          <button type="submit" class="btn-brass-full">Generar reporte</button>
+        </form>
+        <div id="reporte-resumen" class="resumen-reporte"></div>
+        <div class="operacion-tabla-wrap"><table class="operacion-tabla">
+          <thead><tr><th>Fecha</th><th>Pedido</th><th>Mesa</th><th>Cliente</th><th>Empleado</th><th>Pago</th><th>Total</th></tr></thead>
+          <tbody id="reporte-filas"><tr><td colspan="7">Elige un rango de fechas y genera el reporte.</td></tr></tbody>
+        </table></div>
+      </div>
+    </main>
+
+    <!-- APARTADO H: RECETAS -->
+    <main id="vista-recetas" class="vista-seccion" style="display: none;">
+      <div class="panel-container">
+        <div class="panel-header">
+          <h2>Recetario Oficial & Preparación</h2>
+        </div>
+        <div id="recetas-grid" class="recetas-grid"></div>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- MODAL DE EXTRAS (cantinadb: extras) -->
+  <div id="modal-extras" class="modal-overlay" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-top">
+        <h3 id="modal-bebida-titulo">Personalizar Bebida</h3>
+        <button id="cerrar-modal-extras" class="btn-close">&times;</button>
+      </div>
+      <div id="lista-extras-checks" class="extras-list"></div>
+      <button id="confirmar-extras" class="btn-brass-full">Agregar a la Comanda</button>
+    </div>
+  </div>
+
+  <script src="js/mesas.js"></script>
+  <script src="js/clientes.js"></script>
+  <script src="js/comanda.js"></script>
+  <script src="js/barra.js"></script>
+  <script src="js/recetas.js"></script>
+  <script src="js/operaciones.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
